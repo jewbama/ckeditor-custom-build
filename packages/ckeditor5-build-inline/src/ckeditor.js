@@ -30,6 +30,9 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import Mathematics from 'ckeditor5-math/src/math';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
 
 export default class InlineEditor extends InlineEditorBase {}
 
@@ -58,7 +61,10 @@ InlineEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TextTransformation,
+	Mathematics,
+	Font,
+	FontFamily
 ];
 
 // Editor configuration.
@@ -81,7 +87,9 @@ InlineEditor.defaultConfig = {
 			'insertTable',
 			'mediaEmbed',
 			'undo',
-			'redo'
+			'redo',
+			'math',
+			'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
 		]
 	},
 	image: {
@@ -100,6 +108,15 @@ InlineEditor.defaultConfig = {
 			'tableRow',
 			'mergeTableCells'
 		]
+	},
+	math: {
+		engine: 'mathjax', // or katex or function. E.g. (equation, element, display) => { ... }
+		lazyLoad: undefined, // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
+		outputType: 'script', // or span
+		forceOutputType: false, // forces output to use outputType
+		enablePreview: true, // Enable preview view
+		previewClassName: [], // Class names to add to previews
+		popupClassName: [] // Class names to add to math popup balloon
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
